@@ -17,7 +17,7 @@ def call(body) {
                 stage ('Docker image build') {
                     sh "ls"
                     sh "pwd"
-                    sh "sudo docker build -t nodejs-image-new ."
+                    sh "sudo docker build -t ${config.dockerImageName} ."
                 }
             } catch (err) {
                 currentBuild.result = 'FAILED'
