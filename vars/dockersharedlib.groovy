@@ -15,6 +15,8 @@ def call(body) {
                     checkout scm
                 }
                 stage ('Docker image build') {
+                    sh "ls"
+                    sh "pwd"
                     sh "cd node-js-sample &&  sudo docker build -t nodejs-image-new ."
                 }
             } catch (err) {
