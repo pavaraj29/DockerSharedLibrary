@@ -11,10 +11,11 @@ def call(body) {
 
             try {
                 stage ('Clone') {
+                    sh "sudo rm -rf node-js-sample"    
                     checkout scm
                 }
-                stage ('Build') {
-                    sh "echo 'building ${config.projectName} ...'"
+                stage ('Docker image build') {
+                    sh "cd node-js-sample &&  sudo docker build -t nodejs-image-new ."
                 }
             } catch (err) {
                 currentBuild.result = 'FAILED'
