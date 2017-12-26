@@ -1,5 +1,5 @@
 @Library("jenkins-docker-sharedlibrary") _
-    standardPipeline {
+    dockersharedlib {
         projectName = "Sample Project"
         serverDomain = "Sample Project Server Domain"
     }
