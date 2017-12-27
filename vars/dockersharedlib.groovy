@@ -22,7 +22,8 @@ def call(body) {
                 }  
                 stage ('Docker image push') {
                         sh ''' sudo docker login -u pavanraj29 -p Pavan@123
-                                sudo docker push ${config.image}
+                               echo ${config.image}
+                               sudo docker push ${config.image}
                            '''   
                 }      
             } catch (err) {
