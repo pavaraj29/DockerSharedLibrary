@@ -18,8 +18,8 @@ def call(body) {
                     sh "sudo docker build -t ${config.dockerImageName} ."
                 }
                 stage ('Docker image tag') {
-                    sh "sudo  docker tag ${config.dockerImageName} ${config.image}"
-                }    
+                    sh "sudo  docker tag ${config.dockerImageName} ${config.image}:env.BUILD_NUMBER"
+                }   
             } catch (err) {
                 currentBuild.result = 'FAILED'
                 throw err
