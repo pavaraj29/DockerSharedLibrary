@@ -8,7 +8,7 @@ def call(body) {
         node {
             // Clean workspace before doing anything
             deleteDir()
-
+                
             try {
                 stage ('Clone') {
                     sh "sudo rm -rf node-js-sample"    
@@ -18,11 +18,11 @@ def call(body) {
                     sh "sudo docker build -t ${config.dockerImageName} ."
                 }
                 stage ('Docker image tag') {
-                        sh "sudo  docker tag ${config.dockerImageName} ${config.image}:${config.imageVersion}"
+                        sh "sudo  docker tag ${config.dockerImageName} ${config.image}:${BUILD_ID}"
                 }  
                 stage ('Docker image push') {
                         sh "sudo docker login -u pavanraj29 -p Pavan@123"
-                        sh "sudo docker push ${config.image}:${config.imageVersion}"
+                        sh "sudo docker push ${config.image}:${BUILD_ID}"
                 }      
             } catch (err) {
                 currentBuild.result = 'FAILED'
