@@ -15,10 +15,11 @@ def call(body) {
                     checkout scm
                 }
                 stage ('Docker image build') {
-                    sh "ls"
-                    sh "pwd"
                     sh "sudo docker build -t ${config.dockerImageName} ."
                 }
+                stage ('Docker image tag') {
+                    sh "sudo  docker tag nodejs-image-new ${config.image}:${config.VERSION}"
+                }    
             } catch (err) {
                 currentBuild.result = 'FAILED'
                 throw err
