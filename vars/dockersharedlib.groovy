@@ -18,7 +18,7 @@ def call(body) {
                     sh "sudo docker build -t ${config.dockerImageName} ."
                 }
                 stage ('Docker image tag') {
-                    sh "sudo  docker tag nodejs-image-new ${config.image}:${config.VERSION}"
+                    sh "sudo  docker tag nodejs-image-new ${config.image}:${config.imageVersion}"
                 }    
             } catch (err) {
                 currentBuild.result = 'FAILED'
