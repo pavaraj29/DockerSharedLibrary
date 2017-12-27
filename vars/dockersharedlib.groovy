@@ -21,10 +21,8 @@ def call(body) {
                         sh "sudo  docker tag ${config.dockerImageName} ${config.image}"
                 }  
                 stage ('Docker image push') {
-                        sh ''' sudo docker login -u pavanraj29 -p Pavan@123
-                               echo ${config.image}
-                               sudo docker push ${config.image}
-                           '''   
+                        sh "sudo docker login -u pavanraj29 -p Pavan@123"
+                        sh "sudo docker push ${config.image}"
                 }      
             } catch (err) {
                 currentBuild.result = 'FAILED'
