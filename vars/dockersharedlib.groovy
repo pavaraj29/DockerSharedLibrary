@@ -6,6 +6,7 @@ def call(body) {
         body()
 
         node {
+            load ".envvars/env-vars.groovy"    
             // Clean workspace before doing anything
             deleteDir()
                 
@@ -18,14 +19,12 @@ def call(body) {
                     sh "sudo docker build -t ${config.dockerImageName} ."
                 }
                 stage ('Docker image tag') {
-                        sh "sudo  docker tag ${config.dockerImageName} ${config.image}:${config.imageVersion}"
+                        sh "sudo  docker tag ${config.dockerImageName} ${config.image}:${env.imageVersion}"
                 }  
                 stage ('Docker image push') {
                         //sh "echo ${imageVersion}"
                         sh "sudo docker login -u pavanraj29 -p Pavan@123"
-                        sh "sudo docker push ${config.image}:${config.imageVersion}"
-                        load ".envvars/env-vars.groovy"
-                        sh "echo ${env.imageVersion1}"
+                        sh "sudo docker push ${config.image}:${env.imageVersion}"
                 }      
             } catch (err) {
                 currentBuild.result = 'FAILED'
