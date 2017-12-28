@@ -6,6 +6,13 @@ def call(body) {
         body()
 
         node {
+                parameters {
+       // string(defaultValue: 'v2', description: '', name: 'buildVersion')
+        choice(
+            choices: 'Rollingupdate\nBlue-Green\nCanary',
+            description: 'Deployment Type',
+            name: 'REQUESTED_ACTION')
+              }
             load ".envvars/env-vars.groovy"    
             // Clean workspace before doing anything
             deleteDir()
@@ -22,7 +29,7 @@ def call(body) {
                         sh "sudo  docker tag ${config.dockerImageName} ${config.image}:${env.imageVersion}"
                 }  
                 stage ('Docker image push') {
-                        //sh "echo ${imageVersion}"
+                        sh "echo params.REQUESTED_ACTION"
                         sh "sudo docker login -u pavanraj29 -p Pavan@123"
                         sh "sudo docker push ${config.image}:${env.imageVersion}"
                 }      
