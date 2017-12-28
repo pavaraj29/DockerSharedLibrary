@@ -24,6 +24,8 @@ def call(body) {
                         sh "echo ${imageVersion}"
                         sh "sudo docker login -u pavanraj29 -p Pavan@123"
                         sh "sudo docker push ${config.image}:${config.imageVersion}"
+                        load "$JENKINS_HOME/.envvars/env-vars.groovy"
+                        sh "echo ${env.test}"
                 }      
             } catch (err) {
                 currentBuild.result = 'FAILED'
