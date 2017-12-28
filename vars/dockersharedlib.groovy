@@ -19,6 +19,7 @@ def call(body) {
                     sh "sudo docker build -t ${config.dockerImageName} ."
                 }
                 stage ('Docker image tag') {
+                        sh "echo ${env.imageVersion}"
                         sh "sudo  docker tag ${config.dockerImageName} ${config.image}:${env.imageVersion}"
                 }  
                 stage ('Docker image push') {
