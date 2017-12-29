@@ -26,12 +26,12 @@ def call(body) {
                         sh "sudo docker push ${config.image}:${env.imageVersion}"
                 }      
                 stage ('Rollingupdate') {
-                        if (${config.image} == 'Rollingupdate') {
+                        if ("${config.image}" == 'Rollingupdate') {
                         sh "echo RollingUpdate"
                         }
                 }     
                stage ('Blue-Green') {
-                        if (${config.image} == 'Blue-Green') {
+                        if ("${config.image}" == 'Blue-Green') {
                         sh "echo Blue-Green"
                         }
                 }         
